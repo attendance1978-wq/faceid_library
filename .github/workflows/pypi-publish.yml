@@ -1,0 +1,8 @@
+# In .github/workflows/pypi-publish.yml
+# Add the token configuration:
+
+steps:
+  - name: Publish package to PyPI
+    uses: pypa/gh-action-pypi-publish@release/v1
+    with:
+      password: ${{ secrets.PYPI_API_TOKEN }}
