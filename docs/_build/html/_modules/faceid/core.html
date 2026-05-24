@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>faceid.core &mdash; FaceID Library 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            FaceID Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html#install-from-pypi">Install from PyPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html#install-from-github">Install from GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html#install-with-poetry">Install with Poetry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html#real-time-camera-recognition">Real-time Camera Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html#run-the-interactive-demo">Run the Interactive Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">FaceID Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html#database-management">Database Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html#utility-functions">Utility Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Example 1: Basic Face Registration and Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html#example-2-real-time-camera-recognition">Example 2: Real-time Camera Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html#example-3-database-management">Example 3: Database Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html#example-4-batch-processing">Example 4: Batch Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html#example-5-custom-recognition-logic">Example 5: Custom Recognition Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html#example-6-video-file-processing">Example 6: Video File Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Reporting Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html#feature-requests">Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html#pull-requests">Pull Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html#development-setup">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html#coding-standards">Coding Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html#documentation">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html#license">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html#questions">Questions?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Version 1.0.0 (2026-05-24)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html#known-issues">Known Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html#future-plans">Future Plans</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FaceID Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">faceid.core</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for faceid.core</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Core FaceID functionality</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.detector</span><span class="w"> </span><span class="kn">import</span> <span class="n">FaceDetector</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">FaceEncoder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">FaceDatabase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_image</span><span class="p">,</span> <span class="n">validate_image</span>
+
+<div class="viewcode-block" id="FaceID">
+<a class="viewcode-back" href="../../api.html#faceid.core.FaceID">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FaceID</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main FaceID class for face recognition and identification</span>
+<span class="sd">    </span>
+<span class="sd">    Features:</span>
+<span class="sd">    - Face detection in images and video streams</span>
+<span class="sd">    - Face encoding/embedding generation</span>
+<span class="sd">    - Face matching and identification</span>
+<span class="sd">    - Database management for known faces</span>
+<span class="sd">    - Real-time recognition</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+                 <span class="n">model_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;facenet&quot;</span><span class="p">,</span>
+                 <span class="n">detector_backend</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mediapipe&quot;</span><span class="p">,</span>
+                 <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize FaceID system</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            model_type: Type of face recognition model (&#39;facenet&#39;, &#39;arcface&#39;, &#39;vggface&#39;)</span>
+<span class="sd">            detector_backend: Face detector backend (&#39;mediapipe&#39;, &#39;opencv&#39;)</span>
+<span class="sd">            device: Computing device (&#39;auto&#39;, &#39;cpu&#39;, &#39;cuda&#39;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">detector</span> <span class="o">=</span> <span class="n">FaceDetector</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="n">detector_backend</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">FaceEncoder</span><span class="p">(</span><span class="n">model_type</span><span class="o">=</span><span class="n">model_type</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="n">FaceDatabase</span><span class="p">()</span>
+        
+<div class="viewcode-block" id="FaceID.register_face">
+<a class="viewcode-back" href="../../api.html#faceid.core.FaceID.register_face">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_face</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+                     <span class="n">image</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+                     <span class="n">person_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                     <span class="n">person_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                     <span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Register a new face in the database</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            image: Path to image or numpy array</span>
+<span class="sd">            person_id: Unique identifier for the person</span>
+<span class="sd">            person_name: Name of the person</span>
+<span class="sd">            metadata: Additional metadata</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            True if registration successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Load and validate image</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">validate_image</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        
+        <span class="c1"># Detect faces</span>
+        <span class="n">faces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">detect_faces</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">faces</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No face detected in the image&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">faces</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multiple faces detected (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">faces</span><span class="p">)</span><span class="si">}</span><span class="s2">). Please provide image with single face&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Get face encoding</span>
+        <span class="n">face_box</span> <span class="o">=</span> <span class="n">faces</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;bbox&#39;</span><span class="p">]</span>
+        <span class="n">face_img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_face</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">face_box</span><span class="p">)</span>
+        <span class="n">encoding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">face_img</span><span class="p">)</span>
+        
+        <span class="c1"># Add to database</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">add_person</span><span class="p">(</span>
+            <span class="n">person_id</span><span class="o">=</span><span class="n">person_id</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">person_name</span> <span class="ow">or</span> <span class="n">person_id</span><span class="p">,</span>
+            <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span>
+            <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span>
+        <span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="FaceID.identify_face">
+<a class="viewcode-back" href="../../api.html#faceid.core.FaceID.identify_face">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">identify_face</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+                     <span class="n">image</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+                     <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Identify faces in an image</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            image: Path to image or numpy array</span>
+<span class="sd">            threshold: Similarity threshold for matching (lower = stricter)</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            List of dictionaries with recognition results</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">validate_image</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        
+        <span class="c1"># Detect all faces</span>
+        <span class="n">faces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">detect_faces</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">face</span> <span class="ow">in</span> <span class="n">faces</span><span class="p">:</span>
+            <span class="c1"># Extract face region</span>
+            <span class="n">face_img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_face</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">face</span><span class="p">[</span><span class="s1">&#39;bbox&#39;</span><span class="p">])</span>
+            
+            <span class="c1"># Get face encoding</span>
+            <span class="n">encoding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">face_img</span><span class="p">)</span>
+            
+            <span class="c1"># Find matches in database</span>
+            <span class="n">matches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">find_matches</span><span class="p">(</span><span class="n">encoding</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">)</span>
+            
+            <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;bbox&#39;</span><span class="p">:</span> <span class="n">face</span><span class="p">[</span><span class="s1">&#39;bbox&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;confidence&#39;</span><span class="p">:</span> <span class="n">face</span><span class="p">[</span><span class="s1">&#39;confidence&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;matches&#39;</span><span class="p">:</span> <span class="n">matches</span><span class="p">,</span>
+                <span class="s1">&#39;encoding&#39;</span><span class="p">:</span> <span class="n">encoding</span>
+            <span class="p">}</span>
+            
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            
+        <span class="k">return</span> <span class="n">results</span></div>
+
+    
+<div class="viewcode-block" id="FaceID.compare_faces">
+<a class="viewcode-back" href="../../api.html#faceid.core.FaceID.compare_faces">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compare_faces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+                     <span class="n">face1</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+                     <span class="n">face2</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compare two faces and return similarity score</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            face1: First face image</span>
+<span class="sd">            face2: Second face image</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Similarity score between 0 and 1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">img1</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">face1</span><span class="p">)</span>
+        <span class="n">img2</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">face2</span><span class="p">)</span>
+        
+        <span class="c1"># Detect faces</span>
+        <span class="n">faces1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">detect_faces</span><span class="p">(</span><span class="n">img1</span><span class="p">)</span>
+        <span class="n">faces2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">detect_faces</span><span class="p">(</span><span class="n">img2</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">faces1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">faces2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Could not detect faces in both images&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Extract and encode faces</span>
+        <span class="n">face_img1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_face</span><span class="p">(</span><span class="n">img1</span><span class="p">,</span> <span class="n">faces1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;bbox&#39;</span><span class="p">])</span>
+        <span class="n">face_img2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_face</span><span class="p">(</span><span class="n">img2</span><span class="p">,</span> <span class="n">faces2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;bbox&#39;</span><span class="p">])</span>
+        
+        <span class="n">encoding1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">face_img1</span><span class="p">)</span>
+        <span class="n">encoding2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">face_img2</span><span class="p">)</span>
+        
+        <span class="c1"># Calculate similarity</span>
+        <span class="n">similarity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cosine_similarity</span><span class="p">(</span><span class="n">encoding1</span><span class="p">,</span> <span class="n">encoding2</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">similarity</span></div>
+
+    
+<div class="viewcode-block" id="FaceID.verify_face">
+<a class="viewcode-back" href="../../api.html#faceid.core.FaceID.verify_face">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">verify_face</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+                   <span class="n">image</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+                   <span class="n">person_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                   <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verify if a face matches a specific person</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            image: Face image to verify</span>
+<span class="sd">            person_id: Person ID to verify against</span>
+<span class="sd">            threshold: Similarity threshold</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            (is_match, similarity_score)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">faces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">detect_faces</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">faces</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No face detected in the image&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Get encoding</span>
+        <span class="n">face_img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_face</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">faces</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;bbox&#39;</span><span class="p">])</span>
+        <span class="n">encoding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">face_img</span><span class="p">)</span>
+        
+        <span class="c1"># Get stored encoding</span>
+        <span class="n">stored_encoding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">get_encoding</span><span class="p">(</span><span class="n">person_id</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">stored_encoding</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Person ID &#39;</span><span class="si">{</span><span class="n">person_id</span><span class="si">}</span><span class="s2">&#39; not found in database&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Calculate similarity</span>
+        <span class="n">similarity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cosine_similarity</span><span class="p">(</span><span class="n">encoding</span><span class="p">,</span> <span class="n">stored_encoding</span><span class="p">)</span>
+        <span class="n">is_match</span> <span class="o">=</span> <span class="n">similarity</span> <span class="o">&gt;=</span> <span class="n">threshold</span>
+        
+        <span class="k">return</span> <span class="n">is_match</span><span class="p">,</span> <span class="n">similarity</span></div>
+
+    
+<div class="viewcode-block" id="FaceID.train_model">
+<a class="viewcode-back" href="../../api.html#faceid.core.FaceID.train_model">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">train_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+                   <span class="n">images_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                   <span class="n">save_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Train or fine-tune the face recognition model</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            images_dir: Directory containing person folders with images</span>
+<span class="sd">            save_path: Path to save the trained model</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">images_dir</span><span class="p">,</span> <span class="n">save_path</span><span class="p">)</span></div>
+
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_face</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+                     <span class="n">image</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> 
+                     <span class="n">bbox</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract face region from image&quot;&quot;&quot;</span>
+        <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">bbox</span>
+        <span class="n">face_img</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="n">y1</span><span class="p">:</span><span class="n">y2</span><span class="p">,</span> <span class="n">x1</span><span class="p">:</span><span class="n">x2</span><span class="p">]</span>
+        
+        <span class="c1"># Resize to expected input size</span>
+        <span class="n">face_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">face_img</span><span class="p">,</span> <span class="p">(</span><span class="mi">160</span><span class="p">,</span> <span class="mi">160</span><span class="p">))</span>
+        
+        <span class="k">return</span> <span class="n">face_img</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_cosine_similarity</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate cosine similarity between two vectors&quot;&quot;&quot;</span>
+        <span class="n">dot_product</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="n">norm_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="n">norm_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">norm_a</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">norm_b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+        
+        <span class="n">similarity</span> <span class="o">=</span> <span class="n">dot_product</span> <span class="o">/</span> <span class="p">(</span><span class="n">norm_a</span> <span class="o">*</span> <span class="n">norm_b</span><span class="p">)</span>
+        <span class="c1"># Scale from [-1, 1] to [0, 1]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">similarity</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;FaceID(model=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">model_type</span><span class="si">}</span><span class="s2">, database_size=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, attendance1978-wq.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

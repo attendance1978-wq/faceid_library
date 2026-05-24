@@ -1,0 +1,993 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example 1: Basic Face Registration and Recognition &mdash; FaceID Library 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reporting Issues" href="contributing.html" />
+    <link rel="prev" title="FaceID Class" href="api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            FaceID Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#install-from-pypi">Install from PyPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#install-from-github">Install from GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#install-with-poetry">Install with Poetry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html#real-time-camera-recognition">Real-time Camera Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html#run-the-interactive-demo">Run the Interactive Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">FaceID Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#database-management">Database Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#utility-functions">Utility Functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Example 1: Basic Face Registration and Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#example-2-real-time-camera-recognition">Example 2: Real-time Camera Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#example-3-database-management">Example 3: Database Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#example-4-batch-processing">Example 4: Batch Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#example-5-custom-recognition-logic">Example 5: Custom Recognition Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#example-6-video-file-processing">Example 6: Video File Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Reporting Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#feature-requests">Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#pull-requests">Pull Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#development-setup">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#coding-standards">Coding Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#documentation">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#license">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#questions">Questions?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Version 1.0.0 (2026-05-24)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html#known-issues">Known Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html#future-plans">Future Plans</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">FaceID Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Example 1: Basic Face Registration and Recognition</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/examples.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>&#64;”
+Examples
+========</p>
+<p>This page contains complete working examples for common use cases.</p>
+<section id="example-1-basic-face-registration-and-recognition">
+<h1>Example 1: Basic Face Registration and Recognition<a class="headerlink" href="#example-1-basic-face-registration-and-recognition" title="Link to this heading"></a></h1>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">examples/01_basic_usage.py</span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">  2</span><span class="sd">Basic FaceID Usage Example</span>
+<span class="linenos">  3</span><span class="sd">Run this to see the library in action with simple examples</span>
+<span class="linenos">  4</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">  5</span>
+<span class="linenos">  6</span><span class="kn">from</span><span class="w"> </span><span class="nn">faceid</span><span class="w"> </span><span class="kn">import</span> <span class="n">FaceID</span>
+<span class="linenos">  7</span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="linenos">  8</span>
+<span class="linenos">  9</span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 10</span>    <span class="c1"># Initialize FaceID</span>
+<span class="linenos"> 11</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initializing FaceID...&quot;</span><span class="p">)</span>
+<span class="linenos"> 12</span>    <span class="n">face_system</span> <span class="o">=</span> <span class="n">FaceID</span><span class="p">()</span>
+<span class="linenos"> 13</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ FaceID initialized</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 14</span>    
+<span class="linenos"> 15</span>    <span class="c1"># Example 1: Register faces (assuming you have sample images)</span>
+<span class="linenos"> 16</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 17</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 1: Register Faces&quot;</span><span class="p">)</span>
+<span class="linenos"> 18</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 19</span>    
+<span class="linenos"> 20</span>    <span class="n">sample_images</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos"> 21</span>        <span class="s2">&quot;person_001&quot;</span><span class="p">:</span> <span class="s2">&quot;alice.jpg&quot;</span><span class="p">,</span>
+<span class="linenos"> 22</span>        <span class="s2">&quot;person_002&quot;</span><span class="p">:</span> <span class="s2">&quot;bob.jpg&quot;</span><span class="p">,</span>
+<span class="linenos"> 23</span>    <span class="p">}</span>
+<span class="linenos"> 24</span>    
+<span class="linenos"> 25</span>    <span class="k">for</span> <span class="n">person_id</span><span class="p">,</span> <span class="n">image_path</span> <span class="ow">in</span> <span class="n">sample_images</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos"> 26</span>        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">image_path</span><span class="p">):</span>
+<span class="linenos"> 27</span>            <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 28</span>                <span class="n">name</span> <span class="o">=</span> <span class="n">person_id</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+<span class="linenos"> 29</span>                <span class="n">face_system</span><span class="o">.</span><span class="n">register_face</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">person_id</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="linenos"> 30</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Registered </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 31</span>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos"> 32</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Failed to register </span><span class="si">{</span><span class="n">person_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 33</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 34</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠ Image not found: </span><span class="si">{</span><span class="n">image_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 35</span>    
+<span class="linenos"> 36</span>    <span class="c1"># Example 2: List registered people</span>
+<span class="linenos"> 37</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 38</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 2: List Registered People&quot;</span><span class="p">)</span>
+<span class="linenos"> 39</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 40</span>    
+<span class="linenos"> 41</span>    <span class="n">people</span> <span class="o">=</span> <span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">list_people</span><span class="p">()</span>
+<span class="linenos"> 42</span>    <span class="k">if</span> <span class="n">people</span><span class="p">:</span>
+<span class="linenos"> 43</span>        <span class="k">for</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">people</span><span class="p">:</span>
+<span class="linenos"> 44</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • </span><span class="si">{</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (ID: </span><span class="si">{</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;person_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="linenos"> 45</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 46</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  No people registered yet&quot;</span><span class="p">)</span>
+<span class="linenos"> 47</span>    
+<span class="linenos"> 48</span>    <span class="c1"># Example 3: Test identification on sample image</span>
+<span class="linenos"> 49</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 50</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 3: Identify Faces&quot;</span><span class="p">)</span>
+<span class="linenos"> 51</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 52</span>    
+<span class="linenos"> 53</span>    <span class="n">test_image</span> <span class="o">=</span> <span class="s2">&quot;test.jpg&quot;</span>
+<span class="linenos"> 54</span>    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">test_image</span><span class="p">):</span>
+<span class="linenos"> 55</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 56</span>            <span class="n">results</span> <span class="o">=</span> <span class="n">face_system</span><span class="o">.</span><span class="n">identify_face</span><span class="p">(</span><span class="n">test_image</span><span class="p">)</span>
+<span class="linenos"> 57</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2"> face(s):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 58</span>            
+<span class="linenos"> 59</span>            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+<span class="linenos"> 60</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Face </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+<span class="linenos"> 61</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Detection confidence: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;confidence&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 62</span>                
+<span class="linenos"> 63</span>                <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;matches&#39;</span><span class="p">]:</span>
+<span class="linenos"> 64</span>                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Matches:&quot;</span><span class="p">)</span>
+<span class="linenos"> 65</span>                    <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;matches&#39;</span><span class="p">]:</span>
+<span class="linenos"> 66</span>                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    - </span><span class="si">{</span><span class="n">match</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">match</span><span class="p">[</span><span class="s1">&#39;similarity&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 67</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 68</span>                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  No matches found&quot;</span><span class="p">)</span>
+<span class="linenos"> 69</span>                <span class="nb">print</span><span class="p">()</span>
+<span class="linenos"> 70</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos"> 71</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 72</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 73</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠ Test image not found: </span><span class="si">{</span><span class="n">test_image</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 74</span>    
+<span class="linenos"> 75</span>    <span class="c1"># Example 4: Compare two faces</span>
+<span class="linenos"> 76</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 77</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 4: Compare Two Faces&quot;</span><span class="p">)</span>
+<span class="linenos"> 78</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 79</span>    
+<span class="linenos"> 80</span>    <span class="n">face1</span> <span class="o">=</span> <span class="s2">&quot;person1.jpg&quot;</span>
+<span class="linenos"> 81</span>    <span class="n">face2</span> <span class="o">=</span> <span class="s2">&quot;person2.jpg&quot;</span>
+<span class="linenos"> 82</span>    
+<span class="linenos"> 83</span>    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">face1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">face2</span><span class="p">):</span>
+<span class="linenos"> 84</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 85</span>            <span class="n">similarity</span> <span class="o">=</span> <span class="n">face_system</span><span class="o">.</span><span class="n">compare_faces</span><span class="p">(</span><span class="n">face1</span><span class="p">,</span> <span class="n">face2</span><span class="p">)</span>
+<span class="linenos"> 86</span>            <span class="n">match</span> <span class="o">=</span> <span class="s2">&quot;MATCH&quot;</span> <span class="k">if</span> <span class="n">similarity</span> <span class="o">&gt;=</span> <span class="mf">0.6</span> <span class="k">else</span> <span class="s2">&quot;DIFFERENT&quot;</span>
+<span class="linenos"> 87</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Similarity: </span><span class="si">{</span><span class="n">similarity</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">match</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+<span class="linenos"> 88</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos"> 89</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 90</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 91</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠ One or both face images not found&quot;</span><span class="p">)</span>
+<span class="linenos"> 92</span>    
+<span class="linenos"> 93</span>    <span class="c1"># Example 5: Save database</span>
+<span class="linenos"> 94</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 95</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 5: Save Database&quot;</span><span class="p">)</span>
+<span class="linenos"> 96</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 97</span>    
+<span class="linenos"> 98</span>    <span class="n">db_path</span> <span class="o">=</span> <span class="s2">&quot;face_database.pkl&quot;</span>
+<span class="linenos"> 99</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">100</span>        <span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span>
+<span class="linenos">101</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Database saved to </span><span class="si">{</span><span class="n">db_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">102</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">103</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Database is empty, nothing to save&quot;</span><span class="p">)</span>
+<span class="linenos">104</span>    
+<span class="linenos">105</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">106</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Examples complete!&quot;</span><span class="p">)</span>
+<span class="linenos">107</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">108</span>
+<span class="linenos">109</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">110</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="example-2-real-time-camera-recognition">
+<h1>Example 2: Real-time Camera Recognition<a class="headerlink" href="#example-2-real-time-camera-recognition" title="Link to this heading"></a></h1>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">examples/02_camera_recognition.py</span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">  2</span><span class="sd">Real-time Camera Recognition Example</span>
+<span class="linenos">  3</span><span class="sd">Use your webcam for live face recognition</span>
+<span class="linenos">  4</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">  5</span>
+<span class="linenos">  6</span><span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="linenos">  7</span><span class="kn">from</span><span class="w"> </span><span class="nn">faceid</span><span class="w"> </span><span class="kn">import</span> <span class="n">FaceID</span>
+<span class="linenos">  8</span>
+<span class="linenos">  9</span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 10</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 11</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Real-time Camera Recognition&quot;</span><span class="p">)</span>
+<span class="linenos"> 12</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 13</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Initializing...&quot;</span><span class="p">)</span>
+<span class="linenos"> 14</span>    
+<span class="linenos"> 15</span>    <span class="c1"># Initialize FaceID</span>
+<span class="linenos"> 16</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 17</span>        <span class="n">face_system</span> <span class="o">=</span> <span class="n">FaceID</span><span class="p">()</span>
+<span class="linenos"> 18</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ FaceID initialized&quot;</span><span class="p">)</span>
+<span class="linenos"> 19</span>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos"> 20</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Error initializing FaceID: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 21</span>        <span class="k">return</span>
+<span class="linenos"> 22</span>    
+<span class="linenos"> 23</span>    <span class="c1"># Try to load existing database</span>
+<span class="linenos"> 24</span>    <span class="n">db_path</span> <span class="o">=</span> <span class="s2">&quot;face_database.pkl&quot;</span>
+<span class="linenos"> 25</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 26</span>        <span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span>
+<span class="linenos"> 27</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Loaded database from </span><span class="si">{</span><span class="n">db_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 28</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Registered people: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 29</span>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos"> 30</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠ No existing database found&quot;</span><span class="p">)</span>
+<span class="linenos"> 31</span>    
+<span class="linenos"> 32</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Starting camera...&quot;</span><span class="p">)</span>
+<span class="linenos"> 33</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Press &#39;q&#39; to quit&quot;</span><span class="p">)</span>
+<span class="linenos"> 34</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Press &#39;s&#39; to save frame&quot;</span><span class="p">)</span>
+<span class="linenos"> 35</span>    
+<span class="linenos"> 36</span>    <span class="c1"># Open camera</span>
+<span class="linenos"> 37</span>    <span class="n">cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos"> 38</span>    
+<span class="linenos"> 39</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">cap</span><span class="o">.</span><span class="n">isOpened</span><span class="p">():</span>
+<span class="linenos"> 40</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✗ Could not open camera&quot;</span><span class="p">)</span>
+<span class="linenos"> 41</span>        <span class="k">return</span>
+<span class="linenos"> 42</span>    
+<span class="linenos"> 43</span>    <span class="n">frame_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 44</span>    <span class="n">process_interval</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># Process every 3 frames for performance</span>
+<span class="linenos"> 45</span>    
+<span class="linenos"> 46</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 47</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 48</span>            <span class="n">ret</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">cap</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="linenos"> 49</span>            
+<span class="linenos"> 50</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">ret</span><span class="p">:</span>
+<span class="linenos"> 51</span>                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✗ Error reading frame&quot;</span><span class="p">)</span>
+<span class="linenos"> 52</span>                <span class="k">break</span>
+<span class="linenos"> 53</span>            
+<span class="linenos"> 54</span>            <span class="n">frame_count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos"> 55</span>            
+<span class="linenos"> 56</span>            <span class="c1"># Process every N frames</span>
+<span class="linenos"> 57</span>            <span class="k">if</span> <span class="n">frame_count</span> <span class="o">%</span> <span class="n">process_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 58</span>                <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 59</span>                    <span class="c1"># Identify faces</span>
+<span class="linenos"> 60</span>                    <span class="n">results</span> <span class="o">=</span> <span class="n">face_system</span><span class="o">.</span><span class="n">identify_face</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+<span class="linenos"> 61</span>                    
+<span class="linenos"> 62</span>                    <span class="c1"># Draw results</span>
+<span class="linenos"> 63</span>                    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+<span class="linenos"> 64</span>                        <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;bbox&#39;</span><span class="p">]</span>
+<span class="linenos"> 65</span>                        <span class="n">confidence</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;confidence&#39;</span><span class="p">]</span>
+<span class="linenos"> 66</span>                        
+<span class="linenos"> 67</span>                        <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;matches&#39;</span><span class="p">]:</span>
+<span class="linenos"> 68</span>                            <span class="c1"># Found a match</span>
+<span class="linenos"> 69</span>                            <span class="n">best_match</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;matches&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos"> 70</span>                            <span class="n">name</span> <span class="o">=</span> <span class="n">best_match</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="linenos"> 71</span>                            <span class="n">similarity</span> <span class="o">=</span> <span class="n">best_match</span><span class="p">[</span><span class="s1">&#39;similarity&#39;</span><span class="p">]</span>
+<span class="linenos"> 72</span>                            <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Green</span>
+<span class="linenos"> 73</span>                            <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">similarity</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">)&quot;</span>
+<span class="linenos"> 74</span>                        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 75</span>                            <span class="c1"># No match</span>
+<span class="linenos"> 76</span>                            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Unknown&quot;</span>
+<span class="linenos"> 77</span>                            <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>  <span class="c1"># Red</span>
+<span class="linenos"> 78</span>                            <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Unknown&quot;</span>
+<span class="linenos"> 79</span>                        
+<span class="linenos"> 80</span>                        <span class="c1"># Draw bounding box</span>
+<span class="linenos"> 81</span>                        <span class="n">cv2</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">),</span> <span class="n">color</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos"> 82</span>                        
+<span class="linenos"> 83</span>                        <span class="c1"># Draw label background</span>
+<span class="linenos"> 84</span>                        <span class="n">label_size</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">getTextSize</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_SIMPLEX</span><span class="p">,</span> 
+<span class="linenos"> 85</span>                                                     <span class="mf">0.6</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos"> 86</span>                        <span class="n">cv2</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="o">-</span><span class="mi">25</span><span class="p">),</span> 
+<span class="linenos"> 87</span>                                     <span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">label_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="n">color</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos"> 88</span>                        
+<span class="linenos"> 89</span>                        <span class="c1"># Draw label text</span>
+<span class="linenos"> 90</span>                        <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y1</span> <span class="o">-</span> <span class="mi">7</span><span class="p">),</span>
+<span class="linenos"> 91</span>                                   <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_SIMPLEX</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> 
+<span class="linenos"> 92</span>                                   <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos"> 93</span>                
+<span class="linenos"> 94</span>                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos"> 95</span>                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error processing frame: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 96</span>            
+<span class="linenos"> 97</span>            <span class="c1"># Add info text</span>
+<span class="linenos"> 98</span>            <span class="n">info_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Faces: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">frame_count</span><span class="p">)</span><span class="si">}</span><span class="s2"> | DB: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="linenos"> 99</span>            <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">info_text</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+<span class="linenos">100</span>                       <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_SIMPLEX</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">101</span>            <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="s2">&quot;Press &#39;q&#39; to quit | &#39;s&#39; to save&quot;</span><span class="p">,</span>
+<span class="linenos">102</span>                       <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span> <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_SIMPLEX</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> 
+<span class="linenos">103</span>                       <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">104</span>            
+<span class="linenos">105</span>            <span class="c1"># Display frame</span>
+<span class="linenos">106</span>            <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;FaceID - Real-time Recognition&#39;</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
+<span class="linenos">107</span>            
+<span class="linenos">108</span>            <span class="c1"># Handle key press</span>
+<span class="linenos">109</span>            <span class="n">key</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span>
+<span class="linenos">110</span>            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">):</span>
+<span class="linenos">111</span>                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Quitting...&quot;</span><span class="p">)</span>
+<span class="linenos">112</span>                <span class="k">break</span>
+<span class="linenos">113</span>            <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">):</span>
+<span class="linenos">114</span>                <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;capture_</span><span class="si">{</span><span class="n">frame_count</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
+<span class="linenos">115</span>                <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
+<span class="linenos">116</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ Saved frame to </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">117</span>    
+<span class="linenos">118</span>    <span class="k">finally</span><span class="p">:</span>
+<span class="linenos">119</span>        <span class="c1"># Cleanup</span>
+<span class="linenos">120</span>        <span class="n">cap</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+<span class="linenos">121</span>        <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
+<span class="linenos">122</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Camera closed&quot;</span><span class="p">)</span>
+<span class="linenos">123</span>        
+<span class="linenos">124</span>        <span class="c1"># Optionally save database</span>
+<span class="linenos">125</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">126</span>            <span class="n">response</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Save database? (y/n): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos">127</span>            <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span>
+<span class="linenos">128</span>                <span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span>
+<span class="linenos">129</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Database saved to </span><span class="si">{</span><span class="n">db_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">130</span>        <span class="k">except</span><span class="p">:</span>
+<span class="linenos">131</span>            <span class="k">pass</span>
+<span class="linenos">132</span>
+<span class="linenos">133</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">134</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="example-3-database-management">
+<h1>Example 3: Database Management<a class="headerlink" href="#example-3-database-management" title="Link to this heading"></a></h1>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">examples/03_database_management.py</span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">  2</span><span class="sd">Database Management Example</span>
+<span class="linenos">  3</span><span class="sd">Learn how to manage the face database</span>
+<span class="linenos">  4</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">  5</span>
+<span class="linenos">  6</span><span class="kn">from</span><span class="w"> </span><span class="nn">faceid</span><span class="w"> </span><span class="kn">import</span> <span class="n">FaceID</span>
+<span class="linenos">  7</span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="linenos">  8</span>
+<span class="linenos">  9</span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 10</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 11</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Face Database Management&quot;</span><span class="p">)</span>
+<span class="linenos"> 12</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 13</span>    
+<span class="linenos"> 14</span>    <span class="c1"># Initialize FaceID</span>
+<span class="linenos"> 15</span>    <span class="n">face_system</span> <span class="o">=</span> <span class="n">FaceID</span><span class="p">()</span>
+<span class="linenos"> 16</span>    <span class="n">db_path</span> <span class="o">=</span> <span class="s2">&quot;my_faces.db&quot;</span>
+<span class="linenos"> 17</span>    
+<span class="linenos"> 18</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 19</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 20</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Database Menu&quot;</span><span class="p">)</span>
+<span class="linenos"> 21</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 22</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. Add person from image&quot;</span><span class="p">)</span>
+<span class="linenos"> 23</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. List all people&quot;</span><span class="p">)</span>
+<span class="linenos"> 24</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. Find matches for face&quot;</span><span class="p">)</span>
+<span class="linenos"> 25</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;4. Verify face&quot;</span><span class="p">)</span>
+<span class="linenos"> 26</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;5. Get person info&quot;</span><span class="p">)</span>
+<span class="linenos"> 27</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;6. Delete person&quot;</span><span class="p">)</span>
+<span class="linenos"> 28</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;7. Save database&quot;</span><span class="p">)</span>
+<span class="linenos"> 29</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;8. Load database&quot;</span><span class="p">)</span>
+<span class="linenos"> 30</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;9. Clear database&quot;</span><span class="p">)</span>
+<span class="linenos"> 31</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;10. Exit&quot;</span><span class="p">)</span>
+<span class="linenos"> 32</span>        
+<span class="linenos"> 33</span>        <span class="n">choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Select option (1-10): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos"> 34</span>        
+<span class="linenos"> 35</span>        <span class="k">if</span> <span class="n">choice</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+<span class="linenos"> 36</span>            <span class="n">add_person</span><span class="p">(</span><span class="n">face_system</span><span class="p">)</span>
+<span class="linenos"> 37</span>        <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span>
+<span class="linenos"> 38</span>            <span class="n">list_people</span><span class="p">(</span><span class="n">face_system</span><span class="p">)</span>
+<span class="linenos"> 39</span>        <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="s2">&quot;3&quot;</span><span class="p">:</span>
+<span class="linenos"> 40</span>            <span class="n">find_matches</span><span class="p">(</span><span class="n">face_system</span><span class="p">)</span>
+<span class="linenos"> 41</span>        <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="s2">&quot;4&quot;</span><span class="p">:</span>
+<span class="linenos"> 42</span>            <span class="n">verify_face</span><span class="p">(</span><span class="n">face_system</span><span class="p">)</span>
+<span class="linenos"> 43</span>        <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="s2">&quot;5&quot;</span><span class="p">:</span>
+<span class="linenos"> 44</span>            <span class="n">get_person_info</span><span class="p">(</span><span class="n">face_system</span><span class="p">)</span>
+<span class="linenos"> 45</span>        <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="s2">&quot;6&quot;</span><span class="p">:</span>
+<span class="linenos"> 46</span>            <span class="n">delete_person</span><span class="p">(</span><span class="n">face_system</span><span class="p">)</span>
+<span class="linenos"> 47</span>        <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="s2">&quot;7&quot;</span><span class="p">:</span>
+<span class="linenos"> 48</span>            <span class="n">save_database</span><span class="p">(</span><span class="n">face_system</span><span class="p">,</span> <span class="n">db_path</span><span class="p">)</span>
+<span class="linenos"> 49</span>        <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="s2">&quot;8&quot;</span><span class="p">:</span>
+<span class="linenos"> 50</span>            <span class="n">load_database</span><span class="p">(</span><span class="n">face_system</span><span class="p">,</span> <span class="n">db_path</span><span class="p">)</span>
+<span class="linenos"> 51</span>        <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="s2">&quot;9&quot;</span><span class="p">:</span>
+<span class="linenos"> 52</span>            <span class="n">clear_database</span><span class="p">(</span><span class="n">face_system</span><span class="p">)</span>
+<span class="linenos"> 53</span>        <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="s2">&quot;10&quot;</span><span class="p">:</span>
+<span class="linenos"> 54</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Goodbye!&quot;</span><span class="p">)</span>
+<span class="linenos"> 55</span>            <span class="k">break</span>
+<span class="linenos"> 56</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 57</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid option&quot;</span><span class="p">)</span>
+<span class="linenos"> 58</span>
+<span class="linenos"> 59</span><span class="k">def</span><span class="w"> </span><span class="nf">add_person</span><span class="p">(</span><span class="n">face_system</span><span class="p">):</span>
+<span class="linenos"> 60</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 61</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Add Person&quot;</span><span class="p">)</span>
+<span class="linenos"> 62</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 63</span>    
+<span class="linenos"> 64</span>    <span class="n">person_id</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter person ID: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+<span class="linenos"> 65</span>    <span class="n">person_name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter person name: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos"> 66</span>    <span class="n">image_path</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter image path: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos"> 67</span>    
+<span class="linenos"> 68</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">image_path</span><span class="p">):</span>
+<span class="linenos"> 69</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Image not found: </span><span class="si">{</span><span class="n">image_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 70</span>        <span class="k">return</span>
+<span class="linenos"> 71</span>    
+<span class="linenos"> 72</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 73</span>        <span class="c1"># Optional metadata</span>
+<span class="linenos"> 74</span>        <span class="n">dept</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter department (optional): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos"> 75</span>        <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;dept&quot;</span><span class="p">:</span> <span class="n">dept</span><span class="p">}</span> <span class="k">if</span> <span class="n">dept</span> <span class="k">else</span> <span class="p">{}</span>
+<span class="linenos"> 76</span>        
+<span class="linenos"> 77</span>        <span class="n">face_system</span><span class="o">.</span><span class="n">register_face</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">person_id</span><span class="p">,</span> <span class="n">person_name</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
+<span class="linenos"> 78</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Successfully added </span><span class="si">{</span><span class="n">person_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 79</span>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos"> 80</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 81</span>
+<span class="linenos"> 82</span><span class="k">def</span><span class="w"> </span><span class="nf">list_people</span><span class="p">(</span><span class="n">face_system</span><span class="p">):</span>
+<span class="linenos"> 83</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 84</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Registered People&quot;</span><span class="p">)</span>
+<span class="linenos"> 85</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 86</span>    
+<span class="linenos"> 87</span>    <span class="n">people</span> <span class="o">=</span> <span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">list_people</span><span class="p">()</span>
+<span class="linenos"> 88</span>    
+<span class="linenos"> 89</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">people</span><span class="p">:</span>
+<span class="linenos"> 90</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No people registered&quot;</span><span class="p">)</span>
+<span class="linenos"> 91</span>        <span class="k">return</span>
+<span class="linenos"> 92</span>    
+<span class="linenos"> 93</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">people</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 94</span>    <span class="k">for</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">people</span><span class="p">:</span>
+<span class="linenos"> 95</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ID: </span><span class="si">{</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;person_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 96</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Name: </span><span class="si">{</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 97</span>        <span class="k">if</span> <span class="n">person</span><span class="p">[</span><span class="s1">&#39;metadata&#39;</span><span class="p">]:</span>
+<span class="linenos"> 98</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Metadata: </span><span class="si">{</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;metadata&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 99</span>        <span class="nb">print</span><span class="p">()</span>
+<span class="linenos">100</span>
+<span class="linenos">101</span><span class="k">def</span><span class="w"> </span><span class="nf">find_matches</span><span class="p">(</span><span class="n">face_system</span><span class="p">):</span>
+<span class="linenos">102</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">103</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Find Matches&quot;</span><span class="p">)</span>
+<span class="linenos">104</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">105</span>    
+<span class="linenos">106</span>    <span class="n">image_path</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter test image path: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos">107</span>    
+<span class="linenos">108</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">image_path</span><span class="p">):</span>
+<span class="linenos">109</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Image not found&quot;</span><span class="p">)</span>
+<span class="linenos">110</span>        <span class="k">return</span>
+<span class="linenos">111</span>    
+<span class="linenos">112</span>    <span class="n">threshold</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter threshold (0-1, default 0.6): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos">113</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">114</span>        <span class="n">threshold</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span> <span class="k">if</span> <span class="n">threshold</span> <span class="k">else</span> <span class="mf">0.6</span>
+<span class="linenos">115</span>    <span class="k">except</span><span class="p">:</span>
+<span class="linenos">116</span>        <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.6</span>
+<span class="linenos">117</span>    
+<span class="linenos">118</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">119</span>        <span class="n">results</span> <span class="o">=</span> <span class="n">face_system</span><span class="o">.</span><span class="n">identify_face</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">)</span>
+<span class="linenos">120</span>        
+<span class="linenos">121</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="p">:</span>
+<span class="linenos">122</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No faces detected&quot;</span><span class="p">)</span>
+<span class="linenos">123</span>            <span class="k">return</span>
+<span class="linenos">124</span>        
+<span class="linenos">125</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2"> face(s)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">126</span>        
+<span class="linenos">127</span>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+<span class="linenos">128</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Face </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+<span class="linenos">129</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Confidence: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;confidence&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">130</span>            
+<span class="linenos">131</span>            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;matches&#39;</span><span class="p">]:</span>
+<span class="linenos">132</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Matches:&quot;</span><span class="p">)</span>
+<span class="linenos">133</span>                <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;matches&#39;</span><span class="p">]:</span>
+<span class="linenos">134</span>                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    • </span><span class="si">{</span><span class="n">match</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">match</span><span class="p">[</span><span class="s1">&#39;similarity&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">135</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">136</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  No matches found&quot;</span><span class="p">)</span>
+<span class="linenos">137</span>            <span class="nb">print</span><span class="p">()</span>
+<span class="linenos">138</span>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">139</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">140</span>
+<span class="linenos">141</span><span class="k">def</span><span class="w"> </span><span class="nf">verify_face</span><span class="p">(</span><span class="n">face_system</span><span class="p">):</span>
+<span class="linenos">142</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">143</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Verify Face&quot;</span><span class="p">)</span>
+<span class="linenos">144</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">145</span>    
+<span class="linenos">146</span>    <span class="c1"># List available people</span>
+<span class="linenos">147</span>    <span class="n">people</span> <span class="o">=</span> <span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">list_people</span><span class="p">()</span>
+<span class="linenos">148</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">people</span><span class="p">:</span>
+<span class="linenos">149</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No people in database&quot;</span><span class="p">)</span>
+<span class="linenos">150</span>        <span class="k">return</span>
+<span class="linenos">151</span>    
+<span class="linenos">152</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Available people:&quot;</span><span class="p">)</span>
+<span class="linenos">153</span>    <span class="k">for</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">people</span><span class="p">:</span>
+<span class="linenos">154</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • </span><span class="si">{</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;person_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">155</span>    
+<span class="linenos">156</span>    <span class="n">person_id</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Enter person ID to verify against: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos">157</span>    <span class="n">image_path</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter face image: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos">158</span>    
+<span class="linenos">159</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">image_path</span><span class="p">):</span>
+<span class="linenos">160</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Image not found&quot;</span><span class="p">)</span>
+<span class="linenos">161</span>        <span class="k">return</span>
+<span class="linenos">162</span>    
+<span class="linenos">163</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">164</span>        <span class="n">is_match</span><span class="p">,</span> <span class="n">similarity</span> <span class="o">=</span> <span class="n">face_system</span><span class="o">.</span><span class="n">verify_face</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">person_id</span><span class="p">)</span>
+<span class="linenos">165</span>        
+<span class="linenos">166</span>        <span class="n">person</span> <span class="o">=</span> <span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">person_id</span><span class="p">)</span>
+<span class="linenos">167</span>        <span class="k">if</span> <span class="n">is_match</span><span class="p">:</span>
+<span class="linenos">168</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ VERIFIED: Face matches </span><span class="si">{</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">169</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">170</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✗ NOT VERIFIED: Face does not match </span><span class="si">{</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">171</span>        
+<span class="linenos">172</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Similarity: </span><span class="si">{</span><span class="n">similarity</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">173</span>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">174</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">175</span>
+<span class="linenos">176</span><span class="k">def</span><span class="w"> </span><span class="nf">get_person_info</span><span class="p">(</span><span class="n">face_system</span><span class="p">):</span>
+<span class="linenos">177</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">178</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Get Person Info&quot;</span><span class="p">)</span>
+<span class="linenos">179</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">180</span>    
+<span class="linenos">181</span>    <span class="n">person_id</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter person ID: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos">182</span>    
+<span class="linenos">183</span>    <span class="n">person</span> <span class="o">=</span> <span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">person_id</span><span class="p">)</span>
+<span class="linenos">184</span>    <span class="k">if</span> <span class="n">person</span><span class="p">:</span>
+<span class="linenos">185</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Person ID: </span><span class="si">{</span><span class="n">person_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">186</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Name: </span><span class="si">{</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">187</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Metadata: </span><span class="si">{</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;metadata&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">188</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">189</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Person not found: </span><span class="si">{</span><span class="n">person_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">190</span>
+<span class="linenos">191</span><span class="k">def</span><span class="w"> </span><span class="nf">delete_person</span><span class="p">(</span><span class="n">face_system</span><span class="p">):</span>
+<span class="linenos">192</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">193</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Delete Person&quot;</span><span class="p">)</span>
+<span class="linenos">194</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">195</span>    
+<span class="linenos">196</span>    <span class="n">person_id</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter person ID to delete: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos">197</span>    
+<span class="linenos">198</span>    <span class="n">person</span> <span class="o">=</span> <span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">person_id</span><span class="p">)</span>
+<span class="linenos">199</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">person</span><span class="p">:</span>
+<span class="linenos">200</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Person not found: </span><span class="si">{</span><span class="n">person_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">201</span>        <span class="k">return</span>
+<span class="linenos">202</span>    
+<span class="linenos">203</span>    <span class="n">confirm</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Delete </span><span class="si">{</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">? (yes/no): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos">204</span>    <span class="k">if</span> <span class="n">confirm</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+<span class="linenos">205</span>        <span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">delete_person</span><span class="p">(</span><span class="n">person_id</span><span class="p">)</span>
+<span class="linenos">206</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Deleted </span><span class="si">{</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">207</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">208</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cancelled&quot;</span><span class="p">)</span>
+<span class="linenos">209</span>
+<span class="linenos">210</span><span class="k">def</span><span class="w"> </span><span class="nf">save_database</span><span class="p">(</span><span class="n">face_system</span><span class="p">,</span> <span class="n">db_path</span><span class="p">):</span>
+<span class="linenos">211</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">212</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Save Database&quot;</span><span class="p">)</span>
+<span class="linenos">213</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">214</span>    
+<span class="linenos">215</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">216</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Database is empty&quot;</span><span class="p">)</span>
+<span class="linenos">217</span>        <span class="k">return</span>
+<span class="linenos">218</span>    
+<span class="linenos">219</span>    <span class="n">path</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Enter save path (default: </span><span class="si">{</span><span class="n">db_path</span><span class="si">}</span><span class="s2">): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos">220</span>    <span class="n">path</span> <span class="o">=</span> <span class="n">path</span> <span class="ow">or</span> <span class="n">db_path</span>
+<span class="linenos">221</span>    
+<span class="linenos">222</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">223</span>        <span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="linenos">224</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Database saved to </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">225</span>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">226</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">227</span>
+<span class="linenos">228</span><span class="k">def</span><span class="w"> </span><span class="nf">load_database</span><span class="p">(</span><span class="n">face_system</span><span class="p">,</span> <span class="n">db_path</span><span class="p">):</span>
+<span class="linenos">229</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">230</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Load Database&quot;</span><span class="p">)</span>
+<span class="linenos">231</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">232</span>    
+<span class="linenos">233</span>    <span class="n">path</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Enter database path (default: </span><span class="si">{</span><span class="n">db_path</span><span class="si">}</span><span class="s2">): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos">234</span>    <span class="n">path</span> <span class="o">=</span> <span class="n">path</span> <span class="ow">or</span> <span class="n">db_path</span>
+<span class="linenos">235</span>    
+<span class="linenos">236</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">237</span>        <span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="linenos">238</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Loaded database from </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">239</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  People: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">240</span>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">241</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">242</span>
+<span class="linenos">243</span><span class="k">def</span><span class="w"> </span><span class="nf">clear_database</span><span class="p">(</span><span class="n">face_system</span><span class="p">):</span>
+<span class="linenos">244</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">245</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Clear Database&quot;</span><span class="p">)</span>
+<span class="linenos">246</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">247</span>    
+<span class="linenos">248</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">249</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Database is already empty&quot;</span><span class="p">)</span>
+<span class="linenos">250</span>        <span class="k">return</span>
+<span class="linenos">251</span>    
+<span class="linenos">252</span>    <span class="n">confirm</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Clear all </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="p">)</span><span class="si">}</span><span class="s2"> entries? (yes/no): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos">253</span>    <span class="k">if</span> <span class="n">confirm</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+<span class="linenos">254</span>        <span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="linenos">255</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Database cleared&quot;</span><span class="p">)</span>
+<span class="linenos">256</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">257</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cancelled&quot;</span><span class="p">)</span>
+<span class="linenos">258</span>
+<span class="linenos">259</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">260</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="example-4-batch-processing">
+<h1>Example 4: Batch Processing<a class="headerlink" href="#example-4-batch-processing" title="Link to this heading"></a></h1>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">examples/04_batch_processing.py</span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">  2</span><span class="sd">Batch Processing Example</span>
+<span class="linenos">  3</span><span class="sd">Process multiple images efficiently</span>
+<span class="linenos">  4</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">  5</span>
+<span class="linenos">  6</span><span class="kn">from</span><span class="w"> </span><span class="nn">faceid</span><span class="w"> </span><span class="kn">import</span> <span class="n">FaceID</span>
+<span class="linenos">  7</span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="linenos">  8</span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="linenos">  9</span>
+<span class="linenos"> 10</span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 11</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 12</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Batch Face Processing&quot;</span><span class="p">)</span>
+<span class="linenos"> 13</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 14</span>    
+<span class="linenos"> 15</span>    <span class="n">face_system</span> <span class="o">=</span> <span class="n">FaceID</span><span class="p">()</span>
+<span class="linenos"> 16</span>    
+<span class="linenos"> 17</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 18</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 19</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Batch Processing Menu&quot;</span><span class="p">)</span>
+<span class="linenos"> 20</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 21</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. Register all faces from directory&quot;</span><span class="p">)</span>
+<span class="linenos"> 22</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. Test all images in directory&quot;</span><span class="p">)</span>
+<span class="linenos"> 23</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. Compare multiple faces&quot;</span><span class="p">)</span>
+<span class="linenos"> 24</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;4. Export database statistics&quot;</span><span class="p">)</span>
+<span class="linenos"> 25</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;5. Exit&quot;</span><span class="p">)</span>
+<span class="linenos"> 26</span>        
+<span class="linenos"> 27</span>        <span class="n">choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Select option (1-5): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos"> 28</span>        
+<span class="linenos"> 29</span>        <span class="k">if</span> <span class="n">choice</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+<span class="linenos"> 30</span>            <span class="n">batch_register</span><span class="p">(</span><span class="n">face_system</span><span class="p">)</span>
+<span class="linenos"> 31</span>        <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span>
+<span class="linenos"> 32</span>            <span class="n">batch_test</span><span class="p">(</span><span class="n">face_system</span><span class="p">)</span>
+<span class="linenos"> 33</span>        <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="s2">&quot;3&quot;</span><span class="p">:</span>
+<span class="linenos"> 34</span>            <span class="n">batch_compare</span><span class="p">(</span><span class="n">face_system</span><span class="p">)</span>
+<span class="linenos"> 35</span>        <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="s2">&quot;4&quot;</span><span class="p">:</span>
+<span class="linenos"> 36</span>            <span class="n">export_statistics</span><span class="p">(</span><span class="n">face_system</span><span class="p">)</span>
+<span class="linenos"> 37</span>        <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="s2">&quot;5&quot;</span><span class="p">:</span>
+<span class="linenos"> 38</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Goodbye!&quot;</span><span class="p">)</span>
+<span class="linenos"> 39</span>            <span class="k">break</span>
+<span class="linenos"> 40</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 41</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid option&quot;</span><span class="p">)</span>
+<span class="linenos"> 42</span>
+<span class="linenos"> 43</span><span class="k">def</span><span class="w"> </span><span class="nf">batch_register</span><span class="p">(</span><span class="n">face_system</span><span class="p">):</span>
+<span class="linenos"> 44</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 45</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Batch Register Faces&quot;</span><span class="p">)</span>
+<span class="linenos"> 46</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 47</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Expected directory structure:&quot;</span><span class="p">)</span>
+<span class="linenos"> 48</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  people/&quot;</span><span class="p">)</span>
+<span class="linenos"> 49</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    person1/&quot;</span><span class="p">)</span>
+<span class="linenos"> 50</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;      image1.jpg&quot;</span><span class="p">)</span>
+<span class="linenos"> 51</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;      image2.jpg&quot;</span><span class="p">)</span>
+<span class="linenos"> 52</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    person2/&quot;</span><span class="p">)</span>
+<span class="linenos"> 53</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;      image1.jpg</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 54</span>    
+<span class="linenos"> 55</span>    <span class="n">people_dir</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter people directory path: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos"> 56</span>    
+<span class="linenos"> 57</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">people_dir</span><span class="p">):</span>
+<span class="linenos"> 58</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Directory not found: </span><span class="si">{</span><span class="n">people_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 59</span>        <span class="k">return</span>
+<span class="linenos"> 60</span>    
+<span class="linenos"> 61</span>    <span class="n">registered</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 62</span>    <span class="n">failed</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 63</span>    
+<span class="linenos"> 64</span>    <span class="c1"># Process each person folder</span>
+<span class="linenos"> 65</span>    <span class="k">for</span> <span class="n">person_folder</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">people_dir</span><span class="p">):</span>
+<span class="linenos"> 66</span>        <span class="n">person_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">people_dir</span><span class="p">,</span> <span class="n">person_folder</span><span class="p">)</span>
+<span class="linenos"> 67</span>        
+<span class="linenos"> 68</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">person_path</span><span class="p">):</span>
+<span class="linenos"> 69</span>            <span class="k">continue</span>
+<span class="linenos"> 70</span>        
+<span class="linenos"> 71</span>        <span class="n">person_id</span> <span class="o">=</span> <span class="n">person_folder</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+<span class="linenos"> 72</span>        <span class="n">person_name</span> <span class="o">=</span> <span class="n">person_folder</span>
+<span class="linenos"> 73</span>        
+<span class="linenos"> 74</span>        <span class="c1"># Process first image found for this person</span>
+<span class="linenos"> 75</span>        <span class="k">for</span> <span class="n">image_file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">person_path</span><span class="p">):</span>
+<span class="linenos"> 76</span>            <span class="k">if</span> <span class="n">image_file</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;.jpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;.png&#39;</span><span class="p">)):</span>
+<span class="linenos"> 77</span>                <span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">person_path</span><span class="p">,</span> <span class="n">image_file</span><span class="p">)</span>
+<span class="linenos"> 78</span>                
+<span class="linenos"> 79</span>                <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 80</span>                    <span class="n">face_system</span><span class="o">.</span><span class="n">register_face</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">person_id</span><span class="p">,</span> <span class="n">person_name</span><span class="p">)</span>
+<span class="linenos"> 81</span>                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Registered </span><span class="si">{</span><span class="n">person_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 82</span>                    <span class="n">registered</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos"> 83</span>                    <span class="k">break</span>  <span class="c1"># Use first image only</span>
+<span class="linenos"> 84</span>                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos"> 85</span>                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Failed to register </span><span class="si">{</span><span class="n">person_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 86</span>                    <span class="n">failed</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos"> 87</span>                    <span class="k">break</span>
+<span class="linenos"> 88</span>    
+<span class="linenos"> 89</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Results: </span><span class="si">{</span><span class="n">registered</span><span class="si">}</span><span class="s2"> registered, </span><span class="si">{</span><span class="n">failed</span><span class="si">}</span><span class="s2"> failed&quot;</span><span class="p">)</span>
+<span class="linenos"> 90</span>
+<span class="linenos"> 91</span><span class="k">def</span><span class="w"> </span><span class="nf">batch_test</span><span class="p">(</span><span class="n">face_system</span><span class="p">):</span>
+<span class="linenos"> 92</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 93</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Batch Test Images&quot;</span><span class="p">)</span>
+<span class="linenos"> 94</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 95</span>    
+<span class="linenos"> 96</span>    <span class="n">test_dir</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter test images directory: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos"> 97</span>    
+<span class="linenos"> 98</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">test_dir</span><span class="p">):</span>
+<span class="linenos"> 99</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Directory not found: </span><span class="si">{</span><span class="n">test_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">100</span>        <span class="k">return</span>
+<span class="linenos">101</span>    
+<span class="linenos">102</span>    <span class="n">threshold_str</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter threshold (default 0.6): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos">103</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">104</span>        <span class="n">threshold</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">threshold_str</span><span class="p">)</span> <span class="k">if</span> <span class="n">threshold_str</span> <span class="k">else</span> <span class="mf">0.6</span>
+<span class="linenos">105</span>    <span class="k">except</span><span class="p">:</span>
+<span class="linenos">106</span>        <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.6</span>
+<span class="linenos">107</span>    
+<span class="linenos">108</span>    <span class="n">results_file</span> <span class="o">=</span> <span class="s2">&quot;batch_results.txt&quot;</span>
+<span class="linenos">109</span>    
+<span class="linenos">110</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">results_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos">111</span>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Batch Test Results</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">112</span>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">113</span>        
+<span class="linenos">114</span>        <span class="n">image_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">115</span>        <span class="n">match_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">116</span>        
+<span class="linenos">117</span>        <span class="c1"># Process all images</span>
+<span class="linenos">118</span>        <span class="k">for</span> <span class="n">image_file</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">test_dir</span><span class="p">)):</span>
+<span class="linenos">119</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">image_file</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;.jpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;.png&#39;</span><span class="p">)):</span>
+<span class="linenos">120</span>                <span class="k">continue</span>
+<span class="linenos">121</span>            
+<span class="linenos">122</span>            <span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_dir</span><span class="p">,</span> <span class="n">image_file</span><span class="p">)</span>
+<span class="linenos">123</span>            <span class="n">image_count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">124</span>            
+<span class="linenos">125</span>            <span class="k">try</span><span class="p">:</span>
+<span class="linenos">126</span>                <span class="n">results</span> <span class="o">=</span> <span class="n">face_system</span><span class="o">.</span><span class="n">identify_face</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">)</span>
+<span class="linenos">127</span>                
+<span class="linenos">128</span>                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Image: </span><span class="si">{</span><span class="n">image_file</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">129</span>                
+<span class="linenos">130</span>                <span class="k">if</span> <span class="n">results</span><span class="p">:</span>
+<span class="linenos">131</span>                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Faces found: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">132</span>                    
+<span class="linenos">133</span>                    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+<span class="linenos">134</span>                        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Face </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">135</span>                        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Confidence: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;confidence&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">136</span>                        
+<span class="linenos">137</span>                        <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;matches&#39;</span><span class="p">]:</span>
+<span class="linenos">138</span>                            <span class="n">match_count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">139</span>                            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Best match: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;matches&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
+<span class="linenos">140</span>                            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;matches&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;similarity&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">141</span>                        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">142</span>                            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    No matches</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">143</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos">144</span>                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  No faces detected</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">145</span>                
+<span class="linenos">146</span>                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">147</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Processed </span><span class="si">{</span><span class="n">image_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">148</span>                
+<span class="linenos">149</span>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">150</span>                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Image: </span><span class="si">{</span><span class="n">image_file</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">151</span>                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">152</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Error processing </span><span class="si">{</span><span class="n">image_file</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">153</span>        
+<span class="linenos">154</span>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">155</span>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total images: </span><span class="si">{</span><span class="n">image_count</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">156</span>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matches found: </span><span class="si">{</span><span class="n">match_count</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">157</span>    
+<span class="linenos">158</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ Results saved to </span><span class="si">{</span><span class="n">results_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">159</span>
+<span class="linenos">160</span><span class="k">def</span><span class="w"> </span><span class="nf">batch_compare</span><span class="p">(</span><span class="n">face_system</span><span class="p">):</span>
+<span class="linenos">161</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">162</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Batch Compare Faces&quot;</span><span class="p">)</span>
+<span class="linenos">163</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">164</span>    
+<span class="linenos">165</span>    <span class="n">image_dir</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter directory with images to compare: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="linenos">166</span>    
+<span class="linenos">167</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">image_dir</span><span class="p">):</span>
+<span class="linenos">168</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Directory not found&quot;</span><span class="p">)</span>
+<span class="linenos">169</span>        <span class="k">return</span>
+<span class="linenos">170</span>    
+<span class="linenos">171</span>    <span class="c1"># Get all images</span>
+<span class="linenos">172</span>    <span class="n">images</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">image_dir</span><span class="p">)</span> 
+<span class="linenos">173</span>             <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;.jpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;.png&#39;</span><span class="p">))]</span>
+<span class="linenos">174</span>    
+<span class="linenos">175</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">176</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Need at least 2 images to compare&quot;</span><span class="p">)</span>
+<span class="linenos">177</span>        <span class="k">return</span>
+<span class="linenos">178</span>    
+<span class="linenos">179</span>    <span class="n">results_file</span> <span class="o">=</span> <span class="s2">&quot;comparison_results.txt&quot;</span>
+<span class="linenos">180</span>    
+<span class="linenos">181</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">results_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos">182</span>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Face Comparison Results</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">183</span>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">184</span>        
+<span class="linenos">185</span>        <span class="c1"># Compare all pairs</span>
+<span class="linenos">186</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)):</span>
+<span class="linenos">187</span>            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)):</span>
+<span class="linenos">188</span>                <span class="n">image1_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">image_dir</span><span class="p">,</span> <span class="n">images</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="linenos">189</span>                <span class="n">image2_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">image_dir</span><span class="p">,</span> <span class="n">images</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+<span class="linenos">190</span>                
+<span class="linenos">191</span>                <span class="k">try</span><span class="p">:</span>
+<span class="linenos">192</span>                    <span class="n">similarity</span> <span class="o">=</span> <span class="n">face_system</span><span class="o">.</span><span class="n">compare_faces</span><span class="p">(</span><span class="n">image1_path</span><span class="p">,</span> <span class="n">image2_path</span><span class="p">)</span>
+<span class="linenos">193</span>                    <span class="n">match</span> <span class="o">=</span> <span class="s2">&quot;MATCH&quot;</span> <span class="k">if</span> <span class="n">similarity</span> <span class="o">&gt;=</span> <span class="mf">0.6</span> <span class="k">else</span> <span class="s2">&quot;DIFFERENT&quot;</span>
+<span class="linenos">194</span>                    
+<span class="linenos">195</span>                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">images</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">images</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">196</span>                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Similarity: </span><span class="si">{</span><span class="n">similarity</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">match</span><span class="si">}</span><span class="s2">]</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">197</span>                    
+<span class="linenos">198</span>                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ </span><span class="si">{</span><span class="n">images</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">images</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">similarity</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">199</span>                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">200</span>                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">images</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">images</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">201</span>                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">202</span>                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Error comparing </span><span class="si">{</span><span class="n">images</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">images</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">203</span>    
+<span class="linenos">204</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ Results saved to </span><span class="si">{</span><span class="n">results_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">205</span>
+<span class="linenos">206</span><span class="k">def</span><span class="w"> </span><span class="nf">export_statistics</span><span class="p">(</span><span class="n">face_system</span><span class="p">):</span>
+<span class="linenos">207</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">208</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Database Statistics&quot;</span><span class="p">)</span>
+<span class="linenos">209</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="linenos">210</span>    
+<span class="linenos">211</span>    <span class="n">stats_file</span> <span class="o">=</span> <span class="s2">&quot;database_stats.txt&quot;</span>
+<span class="linenos">212</span>    
+<span class="linenos">213</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">stats_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos">214</span>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;FaceID Database Statistics</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">215</span>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">216</span>        
+<span class="linenos">217</span>        <span class="n">people</span> <span class="o">=</span> <span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">list_people</span><span class="p">()</span>
+<span class="linenos">218</span>        
+<span class="linenos">219</span>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total people: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">people</span><span class="p">)</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">220</span>        
+<span class="linenos">221</span>        <span class="k">if</span> <span class="n">people</span><span class="p">:</span>
+<span class="linenos">222</span>            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;People:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">223</span>            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">224</span>            
+<span class="linenos">225</span>            <span class="k">for</span> <span class="n">person</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">people</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]):</span>
+<span class="linenos">226</span>                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ID: </span><span class="si">{</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;person_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">227</span>                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Name: </span><span class="si">{</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">228</span>                
+<span class="linenos">229</span>                <span class="k">if</span> <span class="n">person</span><span class="p">[</span><span class="s1">&#39;metadata&#39;</span><span class="p">]:</span>
+<span class="linenos">230</span>                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Metadata:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">231</span>                    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">person</span><span class="p">[</span><span class="s1">&#39;metadata&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">232</span>                        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">233</span>                
+<span class="linenos">234</span>                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">235</span>    
+<span class="linenos">236</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Statistics saved to </span><span class="si">{</span><span class="n">stats_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">237</span>    
+<span class="linenos">238</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Database Summary:&quot;</span><span class="p">)</span>
+<span class="linenos">239</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Total people: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">face_system</span><span class="o">.</span><span class="n">database</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">240</span>
+<span class="linenos">241</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">242</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="example-5-custom-recognition-logic">
+<h1>Example 5: Custom Recognition Logic<a class="headerlink" href="#example-5-custom-recognition-logic" title="Link to this heading"></a></h1>
+<p>Here’s an example of custom recognition with confidence threshold:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">faceid</span><span class="w"> </span><span class="kn">import</span> <span class="n">FaceID</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CustomFaceRecognition</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.7</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">face_system</span> <span class="o">=</span> <span class="n">FaceID</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">recognize_with_feedback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_path</span><span class="p">):</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">face_system</span><span class="o">.</span><span class="n">identify_face</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;matches&#39;</span><span class="p">]:</span>
+                <span class="n">best_match</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;matches&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">best_match</span><span class="p">[</span><span class="s1">&#39;similarity&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">best_match</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="s2">&quot;HIGH_CONFIDENCE&quot;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">best_match</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="s2">&quot;LOW_CONFIDENCE&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;NO_MATCH&quot;</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;NO_FACE&quot;</span>
+
+<span class="c1"># Usage</span>
+<span class="n">recognizer</span> <span class="o">=</span> <span class="n">CustomFaceRecognition</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">name</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="n">recognizer</span><span class="o">.</span><span class="n">recognize_with_feedback</span><span class="p">(</span><span class="s2">&quot;test.jpg&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recognized: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">, Status: </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-6-video-file-processing">
+<h1>Example 6: Video File Processing<a class="headerlink" href="#example-6-video-file-processing" title="Link to this heading"></a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">faceid</span><span class="w"> </span><span class="kn">import</span> <span class="n">FaceID</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">process_video</span><span class="p">(</span><span class="n">video_path</span><span class="p">,</span> <span class="n">output_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">face_system</span> <span class="o">=</span> <span class="n">FaceID</span><span class="p">()</span>
+    <span class="n">cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">video_path</span><span class="p">)</span>
+
+    <span class="n">frame_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">recognized_faces</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">while</span> <span class="n">cap</span><span class="o">.</span><span class="n">isOpened</span><span class="p">():</span>
+        <span class="n">ret</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">cap</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ret</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="n">face_system</span><span class="o">.</span><span class="n">identify_face</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;matches&#39;</span><span class="p">]:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;matches&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+                <span class="n">recognized_faces</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">recognized_faces</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="n">frame_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">frame_count</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processed </span><span class="si">{</span><span class="n">frame_count</span><span class="si">}</span><span class="s2"> frames...&quot;</span><span class="p">)</span>
+
+    <span class="n">cap</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Recognition Summary:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">recognized_faces</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: detected in </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> frames&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">recognized_faces</span>
+
+<span class="c1"># Process a video file</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">process_video</span><span class="p">(</span><span class="s2">&quot;test_video.mp4&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>“&#64; | Out-File -FilePath examples.rst -Encoding UTF8</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api.html" class="btn btn-neutral float-left" title="FaceID Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="contributing.html" class="btn btn-neutral float-right" title="Reporting Issues" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, attendance1978-wq.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

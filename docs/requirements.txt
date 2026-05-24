@@ -1,0 +1,6 @@
+# Update documentation dependencies
+@"
+sphinx>=4.0.0
+sphinx-rtd-theme>=1.0.0
+readthedocs-sphinx-ext>=2.0
+"@ | Out-File -FilePath docs/requirements.txt -Encoding UTF8
