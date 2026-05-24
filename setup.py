@@ -1,14 +1,21 @@
 from setuptools import setup, find_packages
+import os
 
+# Read README
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-with open("requirements.txt", "r", encoding="utf-8") as fh:
-    requirements = [line.strip() for line in fh if line.strip()]
+# Read requirements
+requirements = []
+if os.path.exists("requirements.txt"):
+    with open("requirements.txt", "r", encoding="utf-8") as fh:
+        requirements = [line.strip() for line in fh if line.strip() and not line.startswith('#')]
 
 setup(
     name="faceid-lib",
     version="1.0.0",
+    author="attendance1978-wq",
+    author_email="attendance1978-wq@users.noreply.github.com",
     author="attendance1978-wq",
     author_email="attendance1978-wq@users.noreply.github.com",
     description="Advanced Face Recognition and Identification Library",
@@ -28,6 +35,7 @@ setup(
         "Topic :: Scientific/Engineering :: Image Recognition",
     ],
     python_requires=">=3.11",
+    python_requires=">=3.11",
     install_requires=requirements,
     extras_require={
         "dev": [
@@ -42,4 +50,6 @@ setup(
             "faceid-demo=faceid.demo:run_demo",
         ],
     },
+    include_package_data=True,
+    zip_safe=False,
 )

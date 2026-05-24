@@ -1,3 +1,5 @@
+﻿[![GitHub stars](https://img.shields.io/github/stars/attendance1978-wq/faceid_library)](https://github.com/attendance1978-wq/faceid_library/stargazers)
+
 # FaceID - Advanced Face Recognition and Identification Library
 
 ![FaceID](https://img.shields.io/badge/version-1.0.0-blue)
@@ -8,13 +10,13 @@ FaceID is a powerful, easy-to-use face recognition library that provides face de
 
 ## Features
 
-- 🎯 **Face Detection**: Multiple backends (MediaPipe, OpenCV) for robust detection
-- 🔍 **Face Recognition**: State-of-the-art embedding models (FaceNet, ArcFace, VGGFace)
-- 💾 **Database Management**: Built-in face database with persistence
-- 🚀 **Real-time Processing**: Optimized for video streams
-- 📱 **Easy API**: Simple and intuitive interface
-- 🎨 **Visualization Tools**: Built-in drawing utilities
-- ⚡ **Multiple Backends**: Flexible detector and model selection
+- ðŸŽ¯ **Face Detection**: Multiple backends (MediaPipe, OpenCV) for robust detection
+- ðŸ” **Face Recognition**: State-of-the-art embedding models (FaceNet, ArcFace, VGGFace)
+- ðŸ’¾ **Database Management**: Built-in face database with persistence
+- ðŸš€ **Real-time Processing**: Optimized for video streams
+- ðŸ“± **Easy API**: Simple and intuitive interface
+- ðŸŽ¨ **Visualization Tools**: Built-in drawing utilities
+- âš¡ **Multiple Backends**: Flexible detector and model selection
 
 ## Installation
 
@@ -369,13 +371,13 @@ The demo provides:
 
 ```
 faceid/
-├── __init__.py          # Package initialization
-├── core.py              # Main FaceID class
-├── models.py            # Face encoding models
-├── detector.py          # Face detection
-├── database.py          # Face database
-├── utils.py             # Utility functions
-└── demo.py              # Interactive demo
+â”œâ”€â”€ __init__.py          # Package initialization
+â”œâ”€â”€ core.py              # Main FaceID class
+â”œâ”€â”€ models.py            # Face encoding models
+â”œâ”€â”€ detector.py          # Face detection
+â”œâ”€â”€ database.py          # Face database
+â”œâ”€â”€ utils.py             # Utility functions
+â””â”€â”€ demo.py              # Interactive demo
 
 setup.py                 # Package setup
 requirements.txt         # Dependencies
@@ -434,4 +436,5 @@ Built with inspiration from:
 
 ---
 
-**Made with ❤️ by FaceID Team**
+**Made with â¤ï¸ by FaceID Team**
+
