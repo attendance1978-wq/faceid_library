@@ -1,7 +1,6 @@
-﻿[![GitHub stars](https://img.shields.io/github/stars/attendance1978-wq/faceid_library)](https://github.com/attendance1978-wq/faceid_library/stargazers)
+﻿# FaceID - Advanced Face Recognition and Identification Library
 
-# FaceID - Advanced Face Recognition and Identification Library
-
+[![GitHub stars](https://img.shields.io/github/stars/attendance1978-wq/faceid_library)](https://github.com/attendance1978-wq/faceid_library/stargazers)
 ![FaceID](https://img.shields.io/badge/version-1.0.0-blue)
 ![Python](https://img.shields.io/badge/python-3.7+-green)
 ![License](https://img.shields.io/badge/license-MIT-orange)
