@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>FaceID Library - Documentation</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; max-width: 800px; margin: 40px auto; }
+        h1 { color: #2c3e50; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+        .button { display: inline-block; padding: 10px 20px; background: #2c3e50; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>FaceID Library Documentation</h1>
+    <p>Welcome to FaceID - Advanced Face Recognition Library for Python</p>
+
+    <h2>Installation</h2>
+    <pre><code>pip install faceid-lib</code></pre>
+
+    <h2>Quick Start</h2>
+    <pre><code>from faceid import FaceID
+
+# Initialize
+face_system = FaceID()
+
+# Register a face
+face_system.register_face("person.jpg", "person", "Person Name")
+
+# Recognize faces
+results = face_system.identify_face("test.jpg")</code></pre>
+
+    <h2>Documentation</h2>
+    <ul>
+        <li><a href="https://github.com/attendance1978-wq/faceid_library">GitHub Repository</a></li>
+        <li><a href="https://pypi.org/project/faceid-lib/">PyPI Package</a></li>
+    </ul>
+
+    <a href="https://github.com/attendance1978-wq/faceid_library" class="button">View on GitHub</a>
+</body>
+</html>
